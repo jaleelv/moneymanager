@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moneymanager2/screens/category/expense_category_list.dart';
 import 'package:moneymanager2/screens/category/income_category_list.dart';
-import 'package:moneymanager2/screens/home/widgets/topbar_category.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -38,14 +37,13 @@ class _CategoryScreenState extends State<CategoryScreen>
             ),
           ],
         ),
-        Expanded(
+        Container(
+          height: 605,
           child: TabBarView(
             controller: _tabController1,
             children: const [
-              Text('Income'),
-              Text('Expense'),
-              // IncomeCategoryList(),
-              // ExpenseCategoryList(),
+              IncomeCategoryList(),
+              ExpenseCategoryList(),
             ],
           ),
         )
