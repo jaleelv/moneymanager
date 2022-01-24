@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moneymanager2/screens/home/widgets/topbar_category.dart';
 
 class TransactonScreen extends StatelessWidget {
   const TransactonScreen({Key? key}) : super(key: key);
@@ -11,27 +10,24 @@ class TransactonScreen extends StatelessWidget {
     return Column(
       children: [
         // Container(color: Colors.amber, child: TopBarCategory()),
-        Container(
-          // color: Colors.red,
-          child: ListView.separated(
-            // shrinkWrap: true,
-            padding: EdgeInsets.all(10),
-            itemBuilder: (ctx, index) {
-              return Card(
-                child: ListTile(
-                  leading: Text('12 dec'),
-                  title: Text('1000'),
-                  subtitle: Text('Category Name'),
-                ),
-              );
-            },
-            separatorBuilder: (ctx, index) {
-              return const SizedBox(
-                height: 5,
-              );
-            },
-            itemCount: 8,
-          ),
+        ListView.separated(
+          // shrinkWrap: true,
+          padding: EdgeInsets.all(10),
+          itemBuilder: (ctx, index) {
+            return Card(
+              child: ListTile(
+                leading: Text('12 dec'),
+                title: Text('1000'),
+                subtitle: Text('Category Name'),
+              ),
+            );
+          },
+          separatorBuilder: (ctx, index) {
+            return const SizedBox(
+              height: 5,
+            );
+          },
+          itemCount: 8,
         ),
       ],
     );

@@ -15,6 +15,7 @@ class BottomNavigation extends StatelessWidget {
             currentIndex: updatedIndex,
             onTap: (newIndex) {
               HomeScreen.selectedIndexNotifier.value = newIndex;
+              HomeScreen.selectedIndexNotifierTopbar.value = newIndex;
             },
             items: const [
               BottomNavigationBarItem(

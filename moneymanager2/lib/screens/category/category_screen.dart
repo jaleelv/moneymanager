@@ -23,7 +23,6 @@ class _CategoryScreenState extends State<CategoryScreen>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // const TopBarCategory(),
         TabBar(
           controller: _tabController1,
           labelColor: Colors.black,
