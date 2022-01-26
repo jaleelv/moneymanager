@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:moneymanager2/models/categories/category_model.dart';
+import 'package:moneymanager2/screens/category/add_catogery.dart';
 import 'package:moneymanager2/screens/home/home_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(CategoryTypeAdapter().typeId)) {
+    Hive.registerAdapter(CategoryTypeAdapter());
+  }
+  if (!Hive.isAdapterRegistered(CategoryModelAdapter().typeId)) {
+    Hive.registerAdapter(CategoryModelAdapter());
+  }
   runApp(const MyApp());
 }
 
@@ -17,6 +28,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       home: const HomeScreen(),
+      routes: {
+        AddCategory.routeName: (ctx) => AddCategory(),
+      },
     );
   }
 }
