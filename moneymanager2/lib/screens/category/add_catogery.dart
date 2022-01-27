@@ -18,55 +18,52 @@ class AddCategory extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              ValueListenableBuilder(
-                valueListenable: selectedTypeNotifier,
-                builder: (BuildContext ctx, int newType, Widget? _) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(fontSize: 22),
-                        ),
-                      ),
-                      Text(
-                        'New Category',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(fontSize: 22),
+                    ),
+                  ),
+                  Text(
+                    'New Category',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        final newType = selectedTypeNotifier.value;
+                        final _name = _nameEdittingController.text;
+                        if (_name.isEmpty) {
+                          return;
+                        }
+                        final _type;
+
+                        if (newType == 0) {
+                          _type = CategoryType.income;
+                        } else {
+                          _type = CategoryType.expense;
+                        }
+
+                        final _category = CategoryModel(
+                            id: DateTime.now()
+                                .microsecondsSinceEpoch
+                                .toString(),
+                            name: _name,
+                            type: _type);
+                        CategoryDB.instance.insertCategory(_category);
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'Done',
                         style: TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            final _name = _nameEdittingController.text;
-                            if (_name.isEmpty) {
-                              return;
-                            }
-                            final _type;
-
-                            if (newType == 0) {
-                              _type = CategoryType.income;
-                            } else {
-                              _type = CategoryType.expense;
-                            }
-
-                            final _category = CategoryModel(
-                                id: DateTime.now()
-                                    .microsecondsSinceEpoch
-                                    .toString(),
-                                name: _name,
-                                type: _type);
-                            CategoryDB.instance.insertCategory(_category);
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'Done',
-                            style: TextStyle(
-                                fontSize: 22, fontWeight: FontWeight.bold),
-                          )),
-                    ],
-                  );
-                },
+                      )),
+                ],
               ),
               TextFormField(
                 controller: _nameEdittingController,

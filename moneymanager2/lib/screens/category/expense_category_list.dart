@@ -3,7 +3,6 @@ import 'package:moneymanager2/db/category/category_db.dart';
 import 'package:moneymanager2/models/categories/category_model.dart';
 
 class ExpenseCategoryList extends StatelessWidget {
-  final Type = CategoryType.expense;
   const ExpenseCategoryList({Key? key}) : super(key: key);
 
   @override
@@ -18,8 +17,11 @@ class ExpenseCategoryList extends StatelessWidget {
             return Card(
               child: ListTile(
                 title: Text(category.name),
-                trailing:
-                    IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                trailing: IconButton(
+                    onPressed: () {
+                      CategoryDB.instance.deleteCategory(category.id);
+                    },
+                    icon: Icon(Icons.delete)),
               ),
             );
           },
