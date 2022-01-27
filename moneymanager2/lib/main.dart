@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:moneymanager2/models/categories/category_model.dart';
+import 'package:moneymanager2/screens/transactions/add_transaction.dart';
 import 'package:moneymanager2/screens/category/add_catogery.dart';
 import 'package:moneymanager2/screens/home/home_screen.dart';
+import 'package:moneymanager2/screens/transactions/add_transaction.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       routes: {
         AddCategory.routeName: (ctx) => AddCategory(),
+        ScreenAddTransaction.routeName: (ctx) => const ScreenAddTransaction(),
       },
     );
   }

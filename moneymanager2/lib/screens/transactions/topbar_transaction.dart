@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moneymanager2/screens/transactions/add_transaction.dart';
 import 'package:moneymanager2/screens/home/home_screen.dart';
 
 class TopBarTransaction extends StatelessWidget {
@@ -27,11 +28,8 @@ class TopBarTransaction extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  if (HomeScreen.selectedIndexNotifier.value == 1) {
-                    print('Add Transaction');
-                  } else if (HomeScreen.selectedIndexNotifier.value == 2) {
-                    print('Add Category');
-                  }
+                  Navigator.of(context)
+                      .pushNamed(ScreenAddTransaction.routeName);
                 },
                 icon: const Icon(
                   Icons.add,

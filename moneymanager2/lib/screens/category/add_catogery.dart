@@ -5,7 +5,7 @@ import 'package:moneymanager2/screens/category/category_screen.dart';
 import 'package:moneymanager2/screens/category/income_category_list.dart';
 
 class AddCategory extends StatelessWidget {
-  static const routeName = 'add-transaction';
+  static const routeName = 'add-category';
   AddCategory({Key? key}) : super(key: key);
   final _nameEdittingController = TextEditingController();
   static ValueNotifier<int> selectedTypeNotifier = ValueNotifier(0);

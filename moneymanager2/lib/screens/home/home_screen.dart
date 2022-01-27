@@ -4,7 +4,7 @@ import 'package:moneymanager2/screens/category/topbar_category.dart';
 import 'package:moneymanager2/screens/home/widgets/bottom_navigation.dart';
 import 'package:moneymanager2/screens/category/topbar_category.dart';
 import 'package:moneymanager2/screens/home/widgets/topbar_spendings.dart';
-import 'package:moneymanager2/screens/home/widgets/topbar_transaction.dart';
+import 'package:moneymanager2/screens/transactions/topbar_transaction.dart';
 import 'package:moneymanager2/screens/spendings/spendings_screen.dart';
 import 'package:moneymanager2/screens/transactions/transaction_screen.dart';
 

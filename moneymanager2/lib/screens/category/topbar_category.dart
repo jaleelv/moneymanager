@@ -31,17 +31,6 @@ class TopBarCategory extends StatelessWidget {
         IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed(AddCategory.routeName);
-              // if (HomeScreen.selectedIndexNotifier.value == 1) {
-              //   print('Add Transaction');
-              // } else if (HomeScreen.selectedIndexNotifier.value == 2) {
-              //   print('Add Category');
-              //   final _sample = CategoryModel(
-              //     id: DateTime.now().microsecondsSinceEpoch.toString(),
-              //     name: 'Travel',
-              //     type: CategoryType.expense,
-              //   );
-              //   CategoryDB().insertCategory(_sample);
-              // }
             },
             icon: const Icon(
               Icons.add,
