@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moneymanager2/db/category/category_db.dart';
+import 'package:moneymanager2/db/transaction_db.dart';
 import 'package:moneymanager2/screens/category/category_screen.dart';
 import 'package:moneymanager2/screens/category/topbar_category.dart';
 import 'package:moneymanager2/screens/home/widgets/bottom_navigation.dart';
@@ -25,6 +27,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TransactonDb.instance.refresh();
+    CategoryDB.instance.refreshUI();
     return Scaffold(
       bottomNavigationBar: const BottomNavigation(),
       body: SafeArea(
