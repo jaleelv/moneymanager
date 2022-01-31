@@ -3,6 +3,7 @@ import 'package:moneymanager2/db/category/category_db.dart';
 import 'package:moneymanager2/db/transaction_db.dart';
 import 'package:moneymanager2/models/categories/category_model.dart';
 import 'package:moneymanager2/models/transaction/transaction_model.dart';
+import 'package:moneymanager2/screens/transactions/transaction_screen.dart';
 
 class ScreenAddTransaction extends StatefulWidget {
   static const routeName = 'add-transaction';
@@ -25,6 +26,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
   void initState() {
     tabController = TabController(length: 2, vsync: this);
     _selectedCategoryType = CategoryType.income;
+    // _selectedDate = TransactonScreen().parseDate(DateTime.now()) as DateTime?;
     _selectedDate = DateTime.now();
     super.initState();
   }

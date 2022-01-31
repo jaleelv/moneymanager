@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:moneymanager2/models/categories/category_model.dart';
 import 'package:moneymanager2/models/transaction/transaction_model.dart';
@@ -22,7 +23,8 @@ class TransactonDb implements TransactonDbFunctions {
 
   ValueNotifier<List<TransactionModel>> transactionListNotifier =
       ValueNotifier([]);
-  ValueNotifier<double> totalAmountListner = ValueNotifier<double>(0);
+  ValueNotifier<double> totalIncomeListNotifier = ValueNotifier(0);
+  ValueNotifier<double> totalExpenseListNotifier = ValueNotifier(0);
   @override
   Future<void> addtransaction(TransactionModel obj) async {
     final _db = await Hive.openBox<TransactionModel>(TRANSACTION_DB_NAME);
@@ -31,16 +33,34 @@ class TransactonDb implements TransactonDbFunctions {
 
   Future<void> refresh() async {
     final _list = await getAllTransactions();
+    double? _totalAmount = 0.0;
 
     _list.sort((first, second) => second.date.compareTo(first.date));
+
+    await Future.forEach(
+      _list,
+      (TransactionModel category) {
+        if (category.type == CategoryType.income) {
+          final IncomeTotal = _list
+              .map((e) => e.amount)
+              .reduce((value, element) => value + element);
+          totalIncomeListNotifier.value = IncomeTotal;
+        } else {
+          final ExpenseTotal = _list
+              .map((e) => e.amount)
+              .reduce((value, element) => value + element);
+          totalExpenseListNotifier.value = ExpenseTotal;
+        }
+      },
+    );
+
     transactionListNotifier.value.clear();
     transactionListNotifier.value.addAll(_list);
+
     transactionListNotifier.notifyListeners();
-    final _amount = _list.map((e) {
-      final _ttl = e.amount + e.amount.toDouble();
-      return _ttl;
-    });
-    totalAmountListner.value = _amount as double;
+    // final _amt = _list.forEach((element) {
+
+    // });
   }
 
   @override
