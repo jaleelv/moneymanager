@@ -9,7 +9,7 @@ class TransactionModel {
   @HiveField(1)
   final DateTime date;
   @HiveField(2)
-  final double amount;
+  late double amount;
   @HiveField(3)
   final String purpose;
   @HiveField(4)

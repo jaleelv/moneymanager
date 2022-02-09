@@ -14,53 +14,46 @@ abstract class TransactonDbFunctions {
   Future<void> deleteTransaction(String id);
 }
 
-class TransactonDb implements TransactonDbFunctions {
+class TransactonDb with ChangeNotifier implements TransactonDbFunctions {
+  List<TransactionModel> _listData = [];
+  List<TransactionModel> get getListData => _listData;
+  List<TransactionModel> filterExpense = [];
+  List<TransactionModel> get filtercategory => filterExpense;
+  List<TransactionModel> distinctList = [];
+  List<TransactionModel> get distinctCategory => distinctList;
   TransactonDb._internal();
   static TransactonDb instance = TransactonDb._internal();
   factory TransactonDb() {
     return instance;
   }
 
-  ValueNotifier<List<TransactionModel>> transactionListNotifier =
-      ValueNotifier([]);
-  ValueNotifier<double> totalIncomeListNotifier = ValueNotifier(0);
-  ValueNotifier<double> totalExpenseListNotifier = ValueNotifier(0);
   @override
   Future<void> addtransaction(TransactionModel obj) async {
     final _db = await Hive.openBox<TransactionModel>(TRANSACTION_DB_NAME);
     await _db.put(obj.id, obj);
+    notifyListeners();
   }
 
   Future<void> refresh() async {
-    final _list = await getAllTransactions();
-    double? _totalAmount = 0.0;
+    _listData = await getAllTransactions();
+    filterExpense = _listData
+        .where((element) => element.category.type.name.startsWith('e'))
+        .toList();
+    // distinctList = filterExpense.sublist(1);
 
-    _list.sort((first, second) => second.date.compareTo(first.date));
+    // print(filterExpense.toString());
 
-    await Future.forEach(
-      _list,
-      (TransactionModel category) {
-        if (category.type == CategoryType.income) {
-          final IncomeTotal = _list
-              .map((e) => e.amount)
-              .reduce((value, element) => value + element);
-          totalIncomeListNotifier.value = IncomeTotal;
-        } else {
-          final ExpenseTotal = _list
-              .map((e) => e.amount)
-              .reduce((value, element) => value + element);
-          totalExpenseListNotifier.value = ExpenseTotal;
-        }
-      },
-    );
+    // final filterData = _listData
+    // .where((element) => element.category.type.name.startsWith('e'));
 
-    transactionListNotifier.value.clear();
-    transactionListNotifier.value.addAll(_list);
+    // final  _listDataMonth = _listData.where((element) =>element.date.month);
+    // var now_1m = new DateTime(now.year, now.month-1, now.day);
 
-    transactionListNotifier.notifyListeners();
-    // final _amt = _list.forEach((element) {
+    filterExpense.sort((a, b) =>
+        (a.category.name).toString().compareTo((b.category.name).toString()));
+    _listData.sort((first, second) => second.date.compareTo(first.date));
 
-    // });
+    notifyListeners();
   }
 
   @override
@@ -74,5 +67,21 @@ class TransactonDb implements TransactonDbFunctions {
     final _db = await Hive.openBox<TransactionModel>(TRANSACTION_DB_NAME);
     await _db.delete(id);
     refresh();
+  }
+
+  void getMonth(List data) {
+    for (final record in data) {
+      final _monthOfRecord = record
+          .date.month; // Gives the month number. January = 1, April = 4, etc.
+      // Do other stuff, based on the current monthNumber
+      switch (_monthOfRecord) {
+        case 1:
+          'JANUARY';
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 }

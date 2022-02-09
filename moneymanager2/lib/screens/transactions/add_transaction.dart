@@ -15,11 +15,13 @@ class ScreenAddTransaction extends StatefulWidget {
 
 class _ScreenAddTransactionState extends State<ScreenAddTransaction>
     with SingleTickerProviderStateMixin {
+  // String? dateToday;
   late TabController tabController;
   DateTime? _selectedDate;
   CategoryType? _selectedCategoryType;
   CategoryModel? _selectedCategoryModel;
   String? _categoryID;
+
   final _amountEdittingController = TextEditingController();
   final _categoryEdittingController = TextEditingController();
   @override
@@ -28,6 +30,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
     _selectedCategoryType = CategoryType.income;
     // _selectedDate = TransactonScreen().parseDate(DateTime.now()) as DateTime?;
     _selectedDate = DateTime.now();
+    // dateToday = TransactonScreen().parseDate(DateTime.now());
+
     super.initState();
   }
 
@@ -122,8 +126,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
               decoration: InputDecoration(hintText: 'Amount'),
             ),
             TextFormField(
+              readOnly: true,
               controller: _categoryEdittingController,
-              decoration: InputDecoration(hintText: 'Category'),
+              decoration: InputDecoration(hintText: 'Select Category'),
             ),
             SizedBox(
               height: 10,

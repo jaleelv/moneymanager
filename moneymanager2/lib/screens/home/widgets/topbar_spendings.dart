@@ -5,18 +5,19 @@ class TopBarSpendings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          child: Text('JANUARY'),
-          style: ElevatedButton.styleFrom(
-              shadowColor: Color(200),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10))),
-        ),
-      ],
-    );
+    return SafeArea(child: Container());
+    // return Row(
+    //   mainAxisAlignment: MainAxisAlignment.center,
+    //   children: [
+    //     ElevatedButton(
+    //       onPressed: () {},
+    //       child: Text('JANUARY'),
+    //       style: ElevatedButton.styleFrom(
+    //           shadowColor: Color(200),
+    //           shape: RoundedRectangleBorder(
+    //               borderRadius: BorderRadius.circular(10))),
+    //     ),
+    //   ],
+    // );
   }
 }
