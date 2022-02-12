@@ -53,14 +53,23 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text("Cancel"),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                    Text("New Transaction"),
+                    Text(
+                      "New Transaction",
+                      style: TextStyle(fontSize: 20),
+                    ),
                     TextButton(
                       onPressed: () {
                         addTransaction();
                       },
-                      child: Text("Done"),
+                      child: Text(
+                        "Done",
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
                   ],
                 ),
@@ -84,12 +93,8 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.purple),
                       tabs: const [
-                        Tab(
-                          text: 'INCOME',
-                        ),
-                        Tab(
-                          text: 'EXPENSE',
-                        ),
+                        Tab(text: 'INCOME'),
+                        Tab(text: 'EXPENSE'),
                       ],
                     ),
                   ],
@@ -116,9 +121,12 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
                 Icons.calendar_today,
                 color: Colors.white,
               ),
-              label: Text(_selectedDate == null
-                  ? DateTime.now().toString()
-                  : _selectedDate!.toString()),
+              label: Text(
+                _selectedDate == null
+                    ? TransactonScreen().parseDate(DateTime.now())
+                    : TransactonScreen().parseDate(_selectedDate!),
+                style: TextStyle(fontSize: 20),
+              ),
             ),
             TextFormField(
               controller: _amountEdittingController,
@@ -191,6 +199,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
       purpose: _categoryText,
       category: _selectedCategoryModel!,
     );
+    // print('date  $_model.date');
 
     await TransactonDb.instance.addtransaction(_model);
     Navigator.of(context).pop();

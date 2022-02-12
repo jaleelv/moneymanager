@@ -22,111 +22,97 @@ class TransactonScreen extends StatelessWidget {
           color: Colors.purple.shade50,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
               child: Container(
-                // width: MediaQuery.of(context).size.width / 2,
-                color: Colors.green.shade100,
-                child: Consumer<ProviderTotalAmount>(
-                    builder: (context, value, Widget) {
-                  value.refreshAmount();
-                  final amt = value.getTotalIncome.toString();
-                  return Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      amt,
-                      style: TextStyle(fontSize: 22),
-                    ),
-                  );
-                }),
+                color: Colors.green,
+                child: Center(
+                  // child: Text('Expense', style: TextStyle(fontSize: 20)),
+                  child: Consumer<ProviderTotalAmount>(
+                    builder: (_, value, __) {
+                      value.refreshAmount();
+                      final totalAmount =
+                          value.getTotalIncome.toStringAsFixed(2);
+                      return Text(totalAmount, style: TextStyle(fontSize: 20));
+                    },
+                  ),
+                ),
               ),
             ),
             Expanded(
               child: Container(
-                // width: MediaQuery.of(context).size.width / 2,
-                color: Colors.red.shade100,
-                child: Consumer<ProviderTotalAmount>(
-                  builder: (ctx, value, child) {
-                    final amt = value.getTotalExpens.toString();
-
-                    return Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        amt,
-                        style: TextStyle(fontSize: 22),
-                      ),
-                    );
-                  },
+                color: Colors.red,
+                child: Center(
+                  child: Consumer<ProviderTotalAmount>(
+                    builder: (_, value, __) {
+                      final totalAmount =
+                          value.getTotalExpens.toStringAsFixed(2);
+                      return Text(totalAmount, style: TextStyle(fontSize: 20));
+                    },
+                  ),
+                  // child: Text('Expense', style: TextStyle(fontSize: 20)),
                 ),
               ),
-            ),
+            )
           ],
+        ),
+
+        Expanded(
+          flex: 2,
+          child: Consumer<TransactonDb>(builder: (_, transactionData, __) {
+            // TransactonDb.instance.refresh();
+            transactionData.refresh();
+            return ListView.separated(
+              padding: const EdgeInsets.all(5),
+              itemBuilder: (_, index) {
+                final _value = transactionData.getListData[index];
+
+                return Slidable(
+                  key: Key(_value.id!),
+                  startActionPane: ActionPane(
+                    motion: const ScrollMotion(),
+                    children: [
+                      SlidableAction(
+                        onPressed: (ctx) {
+                          TransactonDb.instance.deleteTransaction(_value.id!);
+                        },
+                        icon: Icons.delete,
+                        label: 'Delete',
+                      )
+                    ],
+                  ),
+                  child: ListTile(
+                    style: ListTileStyle.list,
+                    title: Text(
+                      _value.category.name,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    subtitle: Text(
+                      parseDate(_value.date),
+                    ),
+                    trailing: Text('RS ${_value.amount.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: _value.type == CategoryType.income
+                              ? Colors.green
+                              : Colors.red,
+                        )),
+                  ),
+                );
+              },
+              separatorBuilder: (ctx, index) {
+                return const SizedBox(
+                  height: 1,
+                );
+              },
+              itemCount: transactionData.getListData.length,
+            );
+          }),
         ),
 
         // --------------------------------------------------------------------------------//
         // Listview widget
-        Column(
-          // mainAxisSize: MainAxisSize.max,
-          children: [
-            Consumer<TransactonDb>(builder: (_, transactionData, __) {
-              // TransactonDb.instance.refresh();
-              transactionData.refresh();
-              return Container(
-                height: 548,
-                child: ListView.separated(
-                  padding: const EdgeInsets.all(5),
-                  itemBuilder: (_, index) {
-                    final _value = transactionData.getListData[index];
-
-                    return Slidable(
-                      key: Key(_value.id!),
-                      startActionPane: ActionPane(
-                        motion: ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            onPressed: (ctx) {
-                              TransactonDb.instance
-                                  .deleteTransaction(_value.id!);
-                            },
-                            icon: Icons.delete,
-                            label: 'Delete',
-                          )
-                        ],
-                      ),
-                      child: Card(
-                        elevation: 0,
-                        child: ListTile(
-                          style: ListTileStyle.list,
-                          title: Text(
-                            _value.category.name,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          subtitle: Text(
-                            parseDate(_value.date),
-                          ),
-                          trailing: Text('RS ${_value.amount}',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: _value.type == CategoryType.income
-                                    ? Colors.green
-                                    : Colors.red,
-                              )),
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (ctx, index) {
-                    return const SizedBox(
-                      height: 1,
-                    );
-                  },
-                  itemCount: transactionData.getListData.length,
-                ),
-              );
-            }),
-          ],
-        ),
       ],
     );
   }

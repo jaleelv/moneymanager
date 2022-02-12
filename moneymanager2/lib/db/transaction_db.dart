@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:moneymanager2/models/categories/category_model.dart';
 import 'package:moneymanager2/models/transaction/transaction_model.dart';
+import 'package:moneymanager2/providers/providers.dart';
 
 const TRANSACTION_DB_NAME = 'transaction-db';
 
@@ -67,6 +68,7 @@ class TransactonDb with ChangeNotifier implements TransactonDbFunctions {
     final _db = await Hive.openBox<TransactionModel>(TRANSACTION_DB_NAME);
     await _db.delete(id);
     refresh();
+    ProviderTotalAmount.instance.refreshAmount();
   }
 
   void getMonth(List data) {

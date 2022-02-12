@@ -35,18 +35,24 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          ValueListenableBuilder(
-            valueListenable: selectedIndexNotifierTopbar,
-            builder: (BuildContext context1, int updatedTopbar, _) {
-              // print(_topbar[updatedIndex]);
-              return _topbar[updatedTopbar];
-            },
+          Expanded(
+            flex: 0,
+            child: ValueListenableBuilder(
+              valueListenable: selectedIndexNotifierTopbar,
+              builder: (BuildContext context1, int updatedTopbar, _) {
+                // print(_topbar[updatedIndex]);
+                return _topbar[updatedTopbar];
+              },
+            ),
           ),
-          ValueListenableBuilder(
-            valueListenable: selectedIndexNotifier,
-            builder: (BuildContext context, int updatedIndex, _) {
-              return _pages[updatedIndex];
-            },
+          Expanded(
+            flex: 1,
+            child: ValueListenableBuilder(
+              valueListenable: selectedIndexNotifier,
+              builder: (BuildContext context, int updatedIndex, _) {
+                return _pages[updatedIndex];
+              },
+            ),
           ),
         ],
       )),
