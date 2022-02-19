@@ -142,7 +142,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
               height: 10,
             ),
             DropdownButton(
-              hint: Text('Select Category'),
+              hint: Text(
+                'Select Category',
+                style: TextStyle(fontSize: 20),
+              ),
               value: _categoryID,
               items: (_selectedCategoryType == CategoryType.income
                       ? CategoryDB.instance.incomeCategoryListner
@@ -151,7 +154,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction>
                   .map((e) {
                 return DropdownMenuItem(
                   value: e.id,
-                  child: Text(e.name),
+                  child: Text(
+                    e.name,
+                    style: TextStyle(fontSize: 20),
+                  ),
                   onTap: () {
                     _selectedCategoryModel = e;
 

@@ -2,9 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:moneymanager2/models/categories/category_model.dart';
 import 'package:moneymanager2/models/transaction/transaction_model.dart';
-import 'package:provider/provider.dart';
 
 const TRANSACTION_DB_NAME = 'transaction-db';
 

@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moneymanager2/db/transaction_db.dart';
-import 'package:moneymanager2/models/categories/category_model.dart';
 import 'package:moneymanager2/models/transaction/transaction_model.dart';
 import 'package:moneymanager2/providers/providers.dart';
 import 'package:provider/provider.dart';
+import 'dart:ffi';
 
 class SpendingsScreen extends StatelessWidget {
   const SpendingsScreen({Key? key}) : super(key: key);
@@ -94,20 +93,23 @@ class SpendingsScreen extends StatelessWidget {
                 itemBuilder: (_, index) {
                   final _value = mergedExpense[index];
 
-                  return ListTile(
-                    style: ListTileStyle.list,
-                    title: Text(
-                      _value.category.name,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    trailing: Text(
-                      'RS ${_value.amount.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
-                      textAlign: TextAlign.end,
-                    ),
-                  );
+                  return mergedExpense.length < index
+                      ? Text('data')
+                      : ListTile(
+                          style: ListTileStyle.list,
+                          title: Text(
+                            _value.category.name,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          trailing: Text(
+                            'RS ${_value.amount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.end,
+                          ),
+                        );
+                  // Text('abcd');
                 },
                 separatorBuilder: (ctx, index) {
                   return const SizedBox(

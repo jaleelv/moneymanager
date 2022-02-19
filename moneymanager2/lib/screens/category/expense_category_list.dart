@@ -16,12 +16,18 @@ class ExpenseCategoryList extends StatelessWidget {
 
             return Card(
               child: ListTile(
-                title: Text(category.name),
+                title: Text(
+                  category.name,
+                  style: TextStyle(fontSize: 20),
+                ),
                 trailing: IconButton(
                     onPressed: () {
                       CategoryDB.instance.deleteCategory(category.id);
                     },
-                    icon: Icon(Icons.delete)),
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    )),
               ),
             );
           },

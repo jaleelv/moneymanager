@@ -28,7 +28,8 @@ class _CategoryScreenState extends State<CategoryScreen>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        Expanded(
+          flex: 0,
           child: TabBar(
             onTap: (index) {
               AddCategory.selectedTypeNotifier.value = index;
@@ -48,14 +49,16 @@ class _CategoryScreenState extends State<CategoryScreen>
             ],
           ),
         ),
-        Container(
-          height: 605,
-          child: TabBarView(
-            controller: tabController1,
-            children: const [
-              IncomeCategoryList(),
-              ExpenseCategoryList(),
-            ],
+        Expanded(
+          child: Container(
+            // height: 700,
+            child: TabBarView(
+              controller: tabController1,
+              children: const [
+                Expanded(child: IncomeCategoryList()),
+                Expanded(child: ExpenseCategoryList()),
+              ],
+            ),
           ),
         )
       ],

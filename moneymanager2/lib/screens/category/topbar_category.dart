@@ -16,7 +16,7 @@ class TopBarCategory extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Edit',
-              style: const TextStyle(color: Colors.purple, fontSize: 22),
+              style: const TextStyle(color: Colors.grey, fontSize: 22),
             )),
         Text(
           'Categories',
@@ -26,7 +26,7 @@ class TopBarCategory extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Sort',
-              style: const TextStyle(color: Colors.purple, fontSize: 22),
+              style: const TextStyle(color: Colors.grey, fontSize: 22),
             )),
         IconButton(
             onPressed: () {

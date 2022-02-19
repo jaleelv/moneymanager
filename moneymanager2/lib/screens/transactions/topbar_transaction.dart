@@ -16,11 +16,11 @@ class TopBarTransaction extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   'Edit',
-                  style: const TextStyle(color: Colors.purple, fontSize: 22),
+                  style: const TextStyle(color: Colors.grey, fontSize: 22),
                 )),
             ElevatedButton(
               onPressed: () {},
-              child: Text('JANUARY'),
+              child: Text(''),
               style: ElevatedButton.styleFrom(
                   shadowColor: Color(200),
                   shape: RoundedRectangleBorder(
@@ -45,7 +45,7 @@ class TopBarTransaction extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   'Sort',
-                  style: const TextStyle(color: Colors.purple, fontSize: 22),
+                  style: const TextStyle(color: Colors.grey, fontSize: 22),
                 )),
             IconButton(
               onPressed: () {},
@@ -67,7 +67,7 @@ class TopBarTransaction extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 'Export',
-                style: const TextStyle(color: Colors.purple, fontSize: 22),
+                style: const TextStyle(color: Colors.grey, fontSize: 22),
               ),
             )
           ],
