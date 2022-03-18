@@ -24,7 +24,7 @@ class SpendingsScreen extends StatelessWidget {
                   Consumer<ProviderTotalAmount>(builder: (context, value, _) {
                     value.refreshAmount();
                     final incomeAmount = value.getTotalIncome;
-                    return Text(incomeAmount.toStringAsFixed(2),
+                    return Text('\u{20B9} ${incomeAmount.toStringAsFixed(2)}',
                         style: TextStyle(fontSize: 22, color: Colors.green));
                   }),
                 ],
@@ -43,7 +43,7 @@ class SpendingsScreen extends StatelessWidget {
                     value.refreshAmount();
                     final expenseAmount = value.getTotalExpens;
                     return Text(
-                      expenseAmount.toStringAsFixed(2),
+                      '\u{20B9} ${expenseAmount.toStringAsFixed(2)}',
                       style: TextStyle(fontSize: 22, color: Colors.red),
                     );
                   }),
@@ -68,6 +68,7 @@ class SpendingsScreen extends StatelessWidget {
                   category: transactionModel.category,
                 ))
                     .amount += amount;
+                print(mergedCategories);
               }
               List<TransactionModel> mergedList = [];
               mergedCategories.forEach((key, value) => mergedList.add(
@@ -102,7 +103,7 @@ class SpendingsScreen extends StatelessWidget {
                             style: TextStyle(fontSize: 20),
                           ),
                           trailing: Text(
-                            'RS ${_value.amount.toStringAsFixed(2)}',
+                            '\u{20B9} ${_value.amount.toStringAsFixed(2)}',
                             style: TextStyle(
                               fontSize: 20,
                             ),
@@ -156,7 +157,7 @@ class SpendingsScreen extends StatelessWidget {
 
                       final balance = value.getBalance.toStringAsFixed(2);
                       return Text(
-                        'RS $balance',
+                        '\u{20B9} $balance',
                         style:
                             TextStyle(fontSize: 22, color: Colors.blueAccent),
                       );

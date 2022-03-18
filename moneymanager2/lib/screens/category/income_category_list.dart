@@ -7,39 +7,37 @@ class IncomeCategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ValueListenableBuilder(
-        valueListenable: CategoryDB.instance.incomeCategoryListner,
-        builder: (BuildContext ctx, List<CategoryModel> newList, Widget? _) {
-          return ListView.separated(
-            itemBuilder: (BuildContext ctx, int index) {
-              final category = newList[index];
-              return Card(
-                child: ListTile(
-                  title: Text(
-                    category.name,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  trailing: IconButton(
-                      onPressed: () {
-                        CategoryDB.instance.deleteCategory(category.id);
-                      },
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                      )),
+    return ValueListenableBuilder(
+      valueListenable: CategoryDB.instance.incomeCategoryListner,
+      builder: (BuildContext ctx, List<CategoryModel> newList, Widget? _) {
+        return ListView.separated(
+          itemBuilder: (BuildContext ctx, int index) {
+            final category = newList[index];
+            return Card(
+              child: ListTile(
+                title: Text(
+                  category.name,
+                  style: TextStyle(fontSize: 20),
                 ),
-              );
-            },
-            separatorBuilder: (BuildContext, int) {
-              return const SizedBox(
-                height: 10,
-              );
-            },
-            itemCount: newList.length,
-          );
-        },
-      ),
+                trailing: IconButton(
+                    onPressed: () {
+                      CategoryDB.instance.deleteCategory(category.id);
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    )),
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext, int) {
+            return const SizedBox(
+              height: 10,
+            );
+          },
+          itemCount: newList.length,
+        );
+      },
     );
   }
 }

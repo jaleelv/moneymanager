@@ -54,9 +54,17 @@ class _CategoryScreenState extends State<CategoryScreen>
             // height: 700,
             child: TabBarView(
               controller: tabController1,
-              children: const [
-                Expanded(child: IncomeCategoryList()),
-                Expanded(child: ExpenseCategoryList()),
+              children: [
+                Column(
+                  children: [
+                    Expanded(child: IncomeCategoryList()),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Expanded(child: ExpenseCategoryList()),
+                  ],
+                ),
               ],
             ),
           ),

@@ -9,6 +9,7 @@ import 'package:moneymanager2/screens/category/add_catogery.dart';
 import 'package:moneymanager2/screens/home/home_screen.dart';
 import 'package:moneymanager2/screens/transactions/add_transaction.dart';
 import 'package:provider/provider.dart';
+import 'dart:ffi';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

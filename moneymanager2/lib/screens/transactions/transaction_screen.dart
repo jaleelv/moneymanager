@@ -34,7 +34,8 @@ class TransactonScreen extends StatelessWidget {
                       value.refreshAmount();
                       final totalAmount =
                           value.getTotalIncome.toStringAsFixed(2);
-                      return Text(totalAmount, style: TextStyle(fontSize: 20));
+                      return Text('\u{20B9} $totalAmount',
+                          style: TextStyle(fontSize: 20));
                     },
                   ),
                 ),
@@ -48,7 +49,8 @@ class TransactonScreen extends StatelessWidget {
                     builder: (_, value, __) {
                       final totalAmount =
                           value.getTotalExpens.toStringAsFixed(2);
-                      return Text(totalAmount, style: TextStyle(fontSize: 20));
+                      return Text('\u{20B9} $totalAmount',
+                          style: TextStyle(fontSize: 20));
                     },
                   ),
                   // child: Text('Expense', style: TextStyle(fontSize: 20)),
@@ -91,13 +93,14 @@ class TransactonScreen extends StatelessWidget {
                     subtitle: Text(
                       parseDate(_value.date),
                     ),
-                    trailing: Text('RS ${_value.amount.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: _value.type == CategoryType.income
-                              ? Colors.green
-                              : Colors.red,
-                        )),
+                    trailing:
+                        Text('\u{20B9} ${_value.amount.toStringAsFixed(2)}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: _value.type == CategoryType.income
+                                  ? Colors.green
+                                  : Colors.red,
+                            )),
                   ),
                 );
               },
